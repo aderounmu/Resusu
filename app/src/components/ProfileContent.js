@@ -7,7 +7,7 @@ const ProfileContent = () => {
             <div className='flex flex-wrap justify-center'>
                 <div className='flex flex-col bg-[#82B1FF] rounded-lg shadow-lg w-4/6 m-6 text-center'>
                     <h4 className='font-semibold mb-2'>Wallet Balance</h4>
-                    <h2 className='text-lg font-bold'>ETH 1.987</h2>
+                    <h2 className='text-lg font-bold'>ETH 1.98756</h2>
 
                     <button className='bg-black text-white font-bold py-2 px-4 rounded hover:bg-[#4285F6] duration-500 focus:outline-none focus:shadow-outline'>
                         Add Money
