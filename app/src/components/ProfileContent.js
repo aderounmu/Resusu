@@ -24,21 +24,21 @@ const ProfileContent = () => {
                 </h1>
 
                 <div className='flex flex-wrap justify-center'>
-                    <div class="flex flex-col bg-white rounded-lg shadow-md w-full m-6 overflow-hidden sm:w-52">
+                    <div className="flex flex-col bg-white rounded-lg shadow-md w-full m-6 overflow-hidden sm:w-52">
                         <CreditCardIcon className="h-20 m-6" />
-                        <h2 href="#" class="bg-[#4285F6] text-black p-6 text-center font-semibold hover:bg-[#82B1FF] transition-all duration-500">Debit Card</h2>
+                        <h2 href="#" className="bg-[#4285F6] text-black p-6 text-center font-semibold hover:bg-[#82B1FF] transition-all duration-500">Debit Card</h2>
                     </div>
-                    <div class="flex flex-col bg-white rounded-lg shadow-md w-full m-6 overflow-hidden sm:w-52">
+                    <div className="flex flex-col bg-white rounded-lg shadow-md w-full m-6 overflow-hidden sm:w-52">
                         <CashIcon className="h-20 m-6" />
-                        <h2 href="#" class="bg-[#4285F6] text-black p-6 text-center font-semibold hover:bg-[#82B1FF] transition-all duration-500">Pay Cash</h2>
+                        <h2 href="#" className="bg-[#4285F6] text-black p-6 text-center font-semibold hover:bg-[#82B1FF] transition-all duration-500">Pay Cash</h2>
                     </div>
-                    <div class="flex flex-col bg-white rounded-lg shadow-md w-full m-6 overflow-hidden sm:w-52">
+                    <div className="flex flex-col bg-white rounded-lg shadow-md w-full m-6 overflow-hidden sm:w-52">
                         <OfficeBuildingIcon className="h-20 m-6" />
-                        <h2 href="#" class="bg-[#4285F6] text-black p-6 text-center font-semibold hover:bg-[#82B1FF] transition-all duration-500">Bank Deposit</h2>
+                        <h2 href="#" className="bg-[#4285F6] text-black p-6 text-center font-semibold hover:bg-[#82B1FF] transition-all duration-500">Bank Deposit</h2>
                     </div>
-                    <div class="flex flex-col bg-white rounded-lg shadow-md w-full m-6 overflow-hidden sm:w-52">
+                    <div className="flex flex-col bg-white rounded-lg shadow-md w-full m-6 overflow-hidden sm:w-52">
                         <SwitchVerticalIcon className="h-20 m-6" />
-                        <h2 href="#" class="bg-[#4285F6] text-black p-6 text-center font-semibold hover:bg-[#82B1FF] transition-all duration-500">USSD</h2>
+                        <h2 href="#" className="bg-[#4285F6] text-black p-6 text-center font-semibold hover:bg-[#82B1FF] transition-all duration-500">USSD</h2>
                     </div>
                 </div>
             </div>
