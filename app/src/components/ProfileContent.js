@@ -1,5 +1,5 @@
 import React from 'react'
-import { SwitchVerticalIcon, OfficeBuildingIcon, CreditCardIcon, CashIcon } from '@heroicons/react/solid'; 
+import { SwitchVerticalIcon, OfficeBuildingIcon, CreditCardIcon, CashIcon, CurrencyDollarIcon, CurrencyEuroIcon, CurrencyPoundIcon } from '@heroicons/react/solid'; 
 
 const ProfileContent = () => {
     return (
@@ -20,33 +20,66 @@ const ProfileContent = () => {
 
             <div>
                 <h1 className='font-bold text-xl text-center p-6'>
-                    Wallet Top-Up
+                    Wallet top-up
                 </h1>
 
                 <div className='flex flex-wrap justify-center'>
-                    <div class="flex flex-col bg-white rounded-lg shadow-md w-full m-6 overflow-hidden sm:w-52">
+                    <div className="flex flex-col bg-white rounded-lg shadow-md w-full m-6 overflow-hidden sm:w-52">
                         <CreditCardIcon className="h-20 m-6" />
                         <h2 href="#" class="bg-[#4285F6] text-black p-6 text-center font-semibold hover:bg-[#82B1FF] transition-all duration-500">Debit Card</h2>
                     </div>
-                    <div class="flex flex-col bg-white rounded-lg shadow-md w-full m-6 overflow-hidden sm:w-52">
+                    <div className="flex flex-col bg-white rounded-lg shadow-md w-full m-6 overflow-hidden sm:w-52">
                         <CashIcon className="h-20 m-6" />
                         <h2 href="#" class="bg-[#4285F6] text-black p-6 text-center font-semibold hover:bg-[#82B1FF] transition-all duration-500">Pay Cash</h2>
                     </div>
-                    <div class="flex flex-col bg-white rounded-lg shadow-md w-full m-6 overflow-hidden sm:w-52">
+                    <div className="flex flex-col bg-white rounded-lg shadow-md w-full m-6 overflow-hidden sm:w-52">
                         <OfficeBuildingIcon className="h-20 m-6" />
                         <h2 href="#" class="bg-[#4285F6] text-black p-6 text-center font-semibold hover:bg-[#82B1FF] transition-all duration-500">Bank Deposit</h2>
                     </div>
-                    <div class="flex flex-col bg-white rounded-lg shadow-md w-full m-6 overflow-hidden sm:w-52">
+                    <div className="flex flex-col bg-white rounded-lg shadow-md w-full m-6 overflow-hidden sm:w-52">
                         <SwitchVerticalIcon className="h-20 m-6" />
                         <h2 href="#" class="bg-[#4285F6] text-black p-6 text-center font-semibold hover:bg-[#82B1FF] transition-all duration-500">USSD</h2>
                     </div>
                 </div>
             </div>
 
-            <div>
-                <h2>
-                
-                </h2>
+            <div className='p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-5'>
+                <h1 className='font-bold text-xl text-center p-6'>
+                    Wallet top-up
+                </h1>
+                <div className='rounded overflow-hidden shadow-lg'>
+                    <CurrencyDollarIcon className='w-full h-8' />
+                    <div className='px-6 py-4'>
+                        <div className='font-bold text-xl mb-2'>RESUSU lite</div>
+                        <p className='text-gray-800 text-base'>Entry RESUSU accont</p>
+                    </div>
+                    <div className='px-6 pt-4 pb-2'>
+                        <button className='inline-block bg-black text-white rounded-full px-3 py-1 font-semibold mr-2 mb-2'>Add</button>
+                        <button className='inline-block bg-black text-white rounded-full px-3 py-1 font-semibold mr-2 mb-2'>Join</button>
+                    </div>
+                </div>
+                <div className='rounded overflow-hidden shadow-lg'>
+                    <CurrencyEuroIcon className='w-full h-8' />
+                    <div className='px-6 py-4'>
+                        <div className='font-bold text-xl mb-2'>RESUSU lite</div>
+                        <p className='text-gray-800 text-base'>Entry RESUSU accont</p>
+                    </div>
+                    <div className='px-6 pt-4 pb-2'>
+                        <button className='inline-block bg-black text-white rounded-full px-3 py-1 font-semibold mr-2 mb-2'>Add</button>
+                        <button className='inline-block bg-black text-white rounded-full px-3 py-1 font-semibold mr-2 mb-2'>Join</button>
+                    </div>
+                </div>
+                <div className='rounded overflow-hidden shadow-lg'>
+                    <CurrencyPoundIcon className='w-full h-8' />
+                    <div className='px-6 py-4 text-center'>
+                        <div className='font-bold text-xl mb-2'>RESUSU lite</div>
+                        <p className='text-gray-800 text-base'>Entry RESUSU accont</p>
+                    </div>
+                    <div className='px-6 pt-4 pb-2'>
+                        <button className='inline-block bg-black text-white rounded-full px-3 py-1 font-semibold mr-2 mb-2'>Add</button>
+                        <button className='inline-block bg-black text-white rounded-full px-3 py-1 font-semibold mr-2 mb-2'>Join</button>
+                    </div>
+                </div>
             </div>
 
         </div>
