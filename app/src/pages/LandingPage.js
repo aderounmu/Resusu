@@ -3,14 +3,15 @@ import HeroNavBar from '../components/HeroNavBar';
 import { useWallet } from '../context/walletContext';
 
 const LandingPage = () => {
-    const { connectWallet , disconnect } = useWallet()
-    useEffect(()=>{
-        connectWallet()
-    },[])
+    const { connectWallet , WalletConnectModal  } = useWallet()
+    // useEffect(()=>{
+    //     connectWallet()
+    // },[])
     
     return (
         <div>
             <HeroNavBar />
+            {/* <WalletConnectModal connectWallet={connectWallet} /> */}
         </div>
     );
 }
