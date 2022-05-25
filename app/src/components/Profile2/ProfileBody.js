@@ -2,10 +2,10 @@ import React from 'react'
 import GroupCard from './GroupCard'
 import { FaPlusCircle} from "react-icons/fa";
 
-function Body() {
+const ProfileBody = () => {
   return (
-    <div className='px-5 py-10 lg:ml-48 lg:px-7 mb-24'>
-        <div className='flex flex-row justify-between items-center'>
+    <>
+    <div className='flex flex-row justify-between items-center'>
             <div className=''>
                 <div className=' text-2xl lg:text-4xl font-semibold'>Good Morning</div>
                 <div className='text-base mt-2 text-gray-400'>Here what's happening in today</div>
@@ -45,9 +45,8 @@ function Body() {
                 <GroupCard/>
             </div>
         </div>
-        
-    </div>
+    </>
   )
 }
 
-export default Body
+export default ProfileBody
