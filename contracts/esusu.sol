@@ -32,7 +32,7 @@ contract Esujo {
         address payable userAddress;
         uint nextPaymentDate;
         uint nextPaymentAmount;
-        uint[] completedDonationRounds
+        uint[] completedDonationRounds;
     }
 
     // create a group
@@ -57,7 +57,7 @@ contract Esujo {
     // CONSTRUCTOR WITH MAPPING OF ADDRESS TO ADMIN
 
     // mapping between groupId and donation rounds
-    mapping (uint => GroupDonation[]) groupDonations
+    mapping (uint => GroupDonation[]) groupDonations;
 
     // create a mapping between groups and groupmembers (name)
     mapping (string => GroupMember[]) groupinfo;
@@ -128,7 +128,8 @@ contract Esujo {
         groupCount += 1;
 
         // create a groupMember object
-        GroupMember memory groupMember = GroupMember(payable(msg.sender), 0, 0, []);
+        uint[] memory groupMemberDonations;
+        GroupMember memory groupMember = GroupMember(payable(msg.sender), 0, 0, groupMemberDonations);
 
         // create the group object
         Group storage group = groupDict[groupCount];
@@ -152,7 +153,7 @@ contract Esujo {
         emit newGroupMemberEvent(msg.sender, group, address(this).balance);
     }
 
-    function getGroupbyId(uint groupId)  public view returns(Group memory, GroupMember[] memory, GroupDonation memory) {
+    function getGroupbyId(uint groupId)  public view returns(Group memory, GroupMember[] memory, GroupDonation[] memory) {
 
         require(userProfile[msg.sender].userAddress == msg.sender, "You have to be an EsusuUser to get this information");
 
@@ -192,7 +193,8 @@ contract Esujo {
 
 
         // create a groupMember profile
-        GroupMember memory groupMember = GroupMember(payable(msg.sender), 0, 0, []);
+        uint[] memory groupMemberDonations;
+        GroupMember memory groupMember = GroupMember(payable(msg.sender), 0, 0, groupMemberDonations);
 
         // add groupmember to group
         groupinfo[group.groupName].push(groupMember);
@@ -238,20 +240,23 @@ contract Esujo {
         // set the current donation round
         uint donationRound = 2;
         // set a pointer for donation rounds algorithm
-        donationRoundsTimer = group.groupActivationTime;
+        uint donationRoundsTimer = group.groupActivationTime;
 
         // set the group donation rounds
-        for (uint i=1; i<groupMembers.length; i++) {
+        for (uint j=1; j<groupMembers.length; j++) {
             // create a GroupDonation
-            donationRoundStartTime = donationRoundsTimer;
-            donationRoundEndTime = donationRoundStartTime + 300;
+            uint donationRoundStartTime = donationRoundsTimer;
+            uint donationRoundEndTime = donationRoundStartTime + 60;
             GroupDonation memory groupdonation = GroupDonation(group, donationRound, donationRoundStartTime, donationRoundEndTime);
 
             // add to the mapping for groups and groupdonations
             groupDonations[groupId].push(groupdonation);
 
             // update the donationRoundsTimer
-            donationRoundsTimer += 600;
+            donationRoundsTimer += 120;
+
+            // increase the donations round
+            donationRound += 1;
         }
 
 
@@ -259,9 +264,9 @@ contract Esujo {
         for (uint i=0; i<groupMembers.length; i++) {
             
             GroupMember storage groupMember = groupMembers[i];
-            groupMember.nextPaymentDate = group.groupActivationTime + 3600;
+            groupMember.nextPaymentDate = group.groupActivationTime + 120;
         //     // TODO: ADMIN SHARE
-            groupMember.nextPaymentAmount = ((group.groupBuyInAmount * 6) - group.groupBuyInAmount) /// 2;
+            groupMember.nextPaymentAmount = ((group.groupBuyInAmount * 6) - group.groupBuyInAmount);
             // groupMember.groupMemberBalance = groupMember.nextPaymentAmount;
             group.groupActivationTime = groupMember.nextPaymentDate;
         }
@@ -281,6 +286,9 @@ contract Esujo {
         // validate
         if (msg.sender != group.groupCoordinator) {
             revert("You are not the coordinator of this group");
+        }
+        if (groupMembers.length != 6) {
+            revert("The group is incomplete");
         }
 
         // look for the person to be paid
@@ -318,6 +326,83 @@ contract Esujo {
             } else {
                 revert("Unable to pay");
             }
+        }
+    }
+
+    function userDonation(uint groupId, uint donationRound) public payable {
+
+        // get the group and groupmembers and groupdonations
+        Group storage group = groupDict[groupId];
+        GroupMember[] storage groupMembers = groupinfo_i[groupId];
+        GroupDonation[] storage groupdonations = groupDonations[groupId];
+        // require(msg.value >= 5 ether, "or");
+        // require(msg.value == group.groupBuyInAmount * (1 ether), "group payment should be group buy in amount");
+        if (groupMembers.length != 6) {
+            revert("The group is incomplete");
+        }
+
+        uint donationAmount = group.groupBuyInAmount * (1 ether);
+
+        if (msg.value < donationAmount) {
+            revert("group payment should be group buy in amount");
+        }
+
+        // ensure the donator is a member of the group and has not paid for that round
+        bool isGroupMember = false;
+        for (uint i=0; i<groupMembers.length; i++) {
+            if (groupMembers[i].userAddress == msg.sender) {
+                GroupMember storage groupmember = groupMembers[i];
+                for (uint k=0; k<groupmember.completedDonationRounds.length; k++) {
+                    if (groupmember.completedDonationRounds[k] == donationRound) {
+                        revert("You have already donated for this round");
+                    }
+                }
+                isGroupMember = true;
+            }
+        }
+
+        // get the donation round requested for
+        GroupDonation memory selectedDonationRound;
+        bool isFound_selectedDonationRound = false;
+        if (isGroupMember == true) {
+            // get the group donation round that was requested
+            for (uint j=0; j<groupdonations.length; j++) {
+                if (groupdonations[j].donationRound == donationRound) {
+                    selectedDonationRound = groupdonations[j];
+                    isFound_selectedDonationRound = true;
+                }
+            }
+        } else {
+            revert("You are not a member of this group");
+        }
+
+        // check that the round is still valid
+        if (isFound_selectedDonationRound == true) {
+            if (block.timestamp >= selectedDonationRound.donationStartTime && block.timestamp <= selectedDonationRound.donationEndTime) {
+
+                // pay the donation
+                if(!payable(msg.sender).send(group.groupBuyInAmount)) {
+                    revert("Unable to transfer donation funds");
+                }
+
+                // increase the group balance
+                group.groupBalance += group.groupBuyInAmount;
+
+                // add the donation round to users completed list
+                for (uint m=0; m<groupMembers.length; m++) {
+                    if (groupMembers[m].userAddress == msg.sender) {
+                        GroupMember storage groupmember = groupMembers[m];
+                        groupmember.completedDonationRounds.push(donationRound);
+                    }
+                }
+            
+            } else if (block.timestamp < selectedDonationRound.donationStartTime) {
+                revert("This group round is not active yet");
+            } else {
+                revert("This group round is expired");
+            }
+        } else {
+            revert("no group round of that choice");
         }
     }
 }
