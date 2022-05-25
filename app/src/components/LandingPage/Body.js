@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import { AiFillFacebook, AiFillInstagram, AiFillYoutube, AiOutlineWhatsApp } from 'react-icons/ai'
 
 const Body = () => {
     return (
@@ -139,45 +140,64 @@ const Body = () => {
             </div>
 
             {/* FOOTER */}
-            <footer className='bg-[#181620bc] text-white'>
-                <div className='max-w-7xl mx-auto'>
-                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3'>
-                        <Link to='/' className='mb-5 cursor-pointer'>
-                            <h4>RESUSU</h4>
-                        </Link>
+            <footer>
+                <div className='p-10 bg-black text-gray-200'>
+                    <div className='max-w-7xl mx-auto'>
+                        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2'>
+                            <div className='mb-5 cursor-pointer'>
+                                <Link to='/'>
+                                    <h4 className='text-2xl pb-4'>RESUSU</h4>
+                                </Link>
+                                <div className='mb-5 text-gray-500'>
+                                    343 Blackwell Street,<br />Festac LG,<br />Enugu.
+                                    <p><strong>Phone: </strong>+23409087625436</p>
+                                    <p><strong>Emai: </strong>info@resusu.io</p>
+                                </div>
+                            </div>
+                            <div className='mb-5'>
+                                <h4 className='pb-4'>Links</h4>
+                                <ul className='text-gray-500'>
+                                    <li className='pb-4 hover:text-yellow-500'>Home</li>
+                                    <li className='pb-4 hover:text-yellow-500'>About</li>
+                                    <li className='pb-4 hover:text-yellow-500'>Features</li>
+                                    <li className='pb-4 hover:text-yellow-500'>Contact</li>
+                                </ul>
+                            </div>
+                            <div className='mb-5'>
+                                <h4 className='pb-4'>Plans</h4>
+                                <ul className='text-gray-500'>
+                                    <li className='pb-4 hover:text-yellow-500'>lite</li>
+                                    <li className='pb-4 hover:text-yellow-500'>midi</li>
+                                    <li className='pb-4 hover:text-yellow-500'>gold</li>
+                                    <li className='pb-4 hover:text-yellow-500'>gold</li>
+                                    <li className='pb-4 hover:text-yellow-500'>gold</li>
+                                    <li className='pb-4 hover:text-yellow-500'>gold</li>
+                                </ul>
+                            </div>
+                            <div className='mb-5'>
+                                <h4 className='pb-4'>Join Our Community</h4>
+                                <p className='text-gray-500 pb-2'>Don't miss out</p>
+                                <form className='flex flex-row flex-wrap'>
+                                    <input className='text-gray-500 w-2/3' type='text' placeholder='example@gmail.com' />
+                                    <button className='p-2 w-1/3 text-white bg-yellow-500 hover:bg-yellow-700'>Subscribe</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                    <div className='mb-5'>
-                        343 Blackwell Street,<br />Festac LG,<br />Enugu.
-                        <p><strong>Phone: </strong>+23409087625436</p>
-                        <p><strong>Emai: </strong>info@resusu.io</p>
-                    </div>
-                    <div className='mb-5'>
-                        <h4>Links</h4>
-                        <ul>
-                            <li>Home</li>
-                            <li>About</li>
-                            <li>Features</li>
-                            <li>Contact</li>
-                        </ul>
-                    </div>
-                    <div className='mb-5'>
-                        <h4>Plans</h4>
-                        <ul>
-                            <li>lite</li>
-                            <li>midi</li>
-                            <li>gold</li>
-                            <li>gold</li>
-                            <li>gold</li>
-                            <li>gold</li>
-                        </ul>
-                    </div>
-                    <div className='mb-5'>
-                        <h4>Join Our Community</h4>
-                        <p>Don't miss out</p>
-                        <form>
-                            <input type='text' placeholder='your email' />
-                            <button>Subscribe</button>
-                        </form>
+                </div>
+                <div className='w-full bg-gray-800 text-gray-400 px-10'>
+                    <div className='max-w-7xl flex flex-col sm:flex-row py-4 mx-auto justify-between items-center'>
+                        <div className='text-center'>
+                            <div className='font-bold'>
+                                Copyright RESUSU. All Rights Reserved
+                            </div>
+                        </div>
+                        <div className='text-center text-white grid grid-cols-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4'>
+                            <AiOutlineWhatsApp className='w-8 h-8 rounded-full bg-yellow-500 hover:bg-yellow-700 mx-1 inline-block pt-1'/>
+                            <AiFillFacebook className='w-8 h-8 rounded-full bg-yellow-500 hover:bg-yellow-700 mx-1 inline-block pt-1'/>
+                            <AiFillInstagram className='w-8 h-8 rounded-full bg-yellow-500 hover:bg-yellow-700 mx-1 inline-block pt-1'/>
+                            <AiFillYoutube className='w-8 h-8 rounded-full bg-yellow-500 hover:bg-yellow-700 mx-1 inline-block pt-1'/>
+                        </div>
                     </div>
                 </div>
             </footer>
