@@ -4,19 +4,17 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LandingPage from '../pages/LandingPage';
 import Login from '../pages/Login';
 import Profile from '../pages/Profile';
+import Profile2 from '../pages/Profile2';
 
 const Main = () => {
   return (
-      <div>
+      <div className='bg-slate-100 h-full'>
           <BrowserRouter>
               <Routes>
-                  <Route path='/' element={<LandingPage />}></Route>
-              </Routes>
-              <Routes>
-                  <Route path='/login' element={<Login />}></Route>
-              </Routes>
-              <Routes>
-                  <Route path='/profilepage' element={<Profile />}></Route>
+                  <Route path='/' element={<LandingPage />}/>
+                  <Route path='/login' element={<Login />}/>
+                  <Route path='/profilepage' element={<Profile />}/>
+                  <Route path='/profile' element={<Profile2/>}/>
               </Routes>
           </BrowserRouter>
     </div>
