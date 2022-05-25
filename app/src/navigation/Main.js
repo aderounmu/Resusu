@@ -9,17 +9,18 @@ import LandingPage2 from '../pages/LandingPage2'
 
 const Main = () => {
   return (
-      <div className='bg-slate-100 h-full'>
-          <BrowserRouter>
-              <Routes>
-                  <Route path='/' element={<LandingPage2 />}/>
-                  <Route path='/login' element={<Login />}/>
-                  <Route path='/profilepage' element={<Profile />}/>
-                  <Route path='/profile' element={<Profile2 />} />
-              </Routes>
-          </BrowserRouter>
+    <div className='bg-slate-100 h-full'>
+      <BrowserRouter>
+        <Routes>
+          {/* <Route path='/' element={<LandingPage />}/> */}
+          <Route path='/login' element={<Login />} />
+          <Route path='/profilepage' element={<Profile />} />
+          <Route path='/profile' element={<Profile2 />} />
+          <Route path='/landingpage2' element={<LandingPage2 />} />
+        </Routes>
+      </BrowserRouter>
     </div>
-  )
+  );
 }
 
 export default Main
