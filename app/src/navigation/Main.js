@@ -5,6 +5,7 @@ import LandingPage from '../pages/LandingPage';
 import Login from '../pages/Login';
 import Profile from '../pages/Profile';
 import Profile2 from '../pages/Profile2';
+import LandingPage2 from '../pages/LandingPage2'
 
 const Main = () => {
   return (
@@ -14,7 +15,8 @@ const Main = () => {
                   <Route path='/' element={<LandingPage />}/>
                   <Route path='/login' element={<Login />}/>
                   <Route path='/profilepage' element={<Profile />}/>
-                  <Route path='/profile' element={<Profile2/>}/>
+                  <Route path='/profile' element={<Profile2 />} />
+                  <Route path='/landingpage2' element={<LandingPage2 />}/>
               </Routes>
           </BrowserRouter>
     </div>

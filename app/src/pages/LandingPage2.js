@@ -2,7 +2,7 @@ import React from 'react'
 import Body from '../components/LandingPage/Body';
 import HeroNavBar from '../components/LandingPage/HeroNavBar';
 
-const LandingPage = () => {
+const LandingPage2 = () => {
     return (
         <div>
             <HeroNavBar />
@@ -11,4 +11,4 @@ const LandingPage = () => {
     );
 }
 
-export default LandingPage
+export default LandingPage2
