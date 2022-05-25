@@ -1,24 +1,24 @@
 import React, {useCallback , useContext , useEffect , useMemo , useState} from 'react'
 import { ethers } from "ethers";
 import Web3Modal from "web3modal";
-// import WalletConnectProvider from "@walletconnect/web3-provider";
-// import CoinbaseWalletSDK from "@coinbase/wallet-sdk";
+//import WalletConnectProvider from "@walletconnect/web3-provider";
+import CoinbaseWalletSDK from "@coinbase/wallet-sdk";
 
-// const providerOptions = {
+const providerOptions = {
 //     walletconnect: {
 //       package: WalletConnectProvider, // required
 //       options: {
 //         infuraId: "3b6d4c576e9a42acb45fa1ec8991e89f" // required
 //       }
 //     },
-//  walletlink: {
-//     package: CoinbaseWalletSDK, // Required
-//     options: {
-//       appName: "Web 3 Modal Demo", // Required
-//       infuraId: "3b6d4c576e9a42acb45fa1ec8991e89f" // Required unless you provide a JSON RPC url; see `rpc` below
-//     }
-//   },
-// };
+ walletlink: {
+    package: CoinbaseWalletSDK, // Required
+    options: {
+      appName: "Web 3 Modal Demo", // Required
+      infuraId: "3b6d4c576e9a42acb45fa1ec8991e89f" // Required unless you provide a JSON RPC url; see `rpc` below
+    }
+  },
+};
 
 // async function connectWallet(provider ,account , setProvider , setAccount){
 //     if(!provider){
