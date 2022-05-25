@@ -41,7 +41,7 @@ export const WalletConnectModal = ({connectWallet}) => {
     return(
       <div className='absolute w-full h-full top-0 left-0 bg-slate-300/80 flex justify-center items-center z-20'>
         <div className="flex flex-col justify-center items-center py-8 px-8  rounded-md bg-white ">
-            <div className="flex justify-end w-full mb-5 ">
+            <div className="flex justify-end w-full mb-5 pb-3 border-gray-300 border-b-[0.5px]">
               <button onClick={()=> setShow(false)}><FaTimes/></button>
             </div>
             <button className='px-16' onClick={()=> connectWallet()}>

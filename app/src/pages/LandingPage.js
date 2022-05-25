@@ -1,4 +1,5 @@
 import React,{ useEffect} from 'react'
+import HeroBody from '../components/HeroBody';
 import HeroNavBar from '../components/HeroNavBar';
 import { useWallet } from '../context/walletContext';
 
@@ -12,6 +13,7 @@ const LandingPage = () => {
         <div>
             <HeroNavBar />
             {/* <WalletConnectModal connectWallet={connectWallet} /> */}
+            <HeroBody/>
         </div>
     );
 }
