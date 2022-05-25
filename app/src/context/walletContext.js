@@ -4,21 +4,33 @@ import Web3Modal from "web3modal";
 //import WalletConnectProvider from "@walletconnect/web3-provider";
 import CoinbaseWalletSDK from "@coinbase/wallet-sdk";
 
-const providerOptions = {
+// const providerOptions = {
 //     walletconnect: {
 //       package: WalletConnectProvider, // required
 //       options: {
 //         infuraId: "3b6d4c576e9a42acb45fa1ec8991e89f" // required
 //       }
 //     },
- walletlink: {
-    package: CoinbaseWalletSDK, // Required
-    options: {
-      appName: "Web 3 Modal Demo", // Required
-      infuraId: "3b6d4c576e9a42acb45fa1ec8991e89f" // Required unless you provide a JSON RPC url; see `rpc` below
-    }
-  },
-};
+//  walletlink: {
+//     package: CoinbaseWalletSDK, // Required
+//     options: {
+//       appName: "Chainlink hackathon", // Required
+//       infuraId: "3b6d4c576e9a42acb45fa1ec8991e89f" // Required unless you provide a JSON RPC url; see `rpc` below
+//     }
+//   },
+// };
+
+const modalWeb3 = new Web3Modal({
+    cacheProvider: true,
+    providerOptions: /*{walletlink: */{
+            package: CoinbaseWalletSDK, // Required
+            options: {
+                appName: "Chainlink hackathon", // Required
+                infuraId: "3b6d4c576e9a42acb45fa1ec8991e89f" // Required unless you provide a JSON RPC url; see `rpc` below
+            }
+        }
+    // }
+})
 
 // async function connectWallet(provider ,account , setProvider , setAccount){
 //     if(!provider){
@@ -59,17 +71,88 @@ export const WalletProvider = ({children}) => {
 
 
 
-    // const showModal =  async ()  => {
-    //     await showForm(provider ,account , setProvider , setAccount)
-    // }
+    const connectWallet = async () => {
+        try{
+            const _provider = await modalWeb3.connect();
+            const _ethLib = new ethers.providers.Web3Provider(_provider);
+            const _account  = await _ethLib.listAccounts();
+            const _network = await _ethLib.getNetwork();
 
-    const values = {
+            setProvider(_provider);
+            setEthLib(_ethLib);
+           if(_account) setAccount(_account[0]);
+            setChainId(_network.chainId)
+
+            console.log(account)
+            console.log(_account)
+        }catch(err){
+            setError(err)
+        }
+    }
+
+
+    const refreshState = () => {
+        setAccount();
+        setChainId();
+        setNetwork("");
+    };
+
+    const disconnect = async () => {
+        await modalWeb3.clearCachedProvider();
+        refreshState();
+    };
+
+    useEffect(() => {
+        if (modalWeb3.cachedProvider) {
+        //   connectWallet();
+        }
+      }, []);
+    
+    
+    useEffect(() => {
+        if (provider?.on) {
+          const handleAccountsChanged = (accounts) => {
+            console.log("accountsChanged", accounts);
+            if (accounts) setAccount(accounts[0]);
+          };
+    
+          const handleChainChanged = (_hexChainId) => {
+            setChainId(_hexChainId);
+          };
+    
+          const handleDisconnect = () => {
+            console.log("disconnect", error);
+            disconnect();
+          };
+    
+          provider.on("accountsChanged", handleAccountsChanged);
+          provider.on("chainChanged", handleChainChanged);
+          provider.on("disconnect", handleDisconnect);
+    
+          return () => {
+            if (provider.removeListener) {
+              provider.removeListener("accountsChanged", handleAccountsChanged);
+              provider.removeListener("chainChanged", handleChainChanged);
+              provider.removeListener("disconnect", handleDisconnect);
+            }
+          };
+        }
+      }, [provider]);
+
+      const values = {
         isLoading, 
         isActive,
         account,
         provider,
+        ethLib,
+        error,
+        chainId,
+        network,
+        connectWallet,
+        disconnect,
         //showModal,
     }
+    
 
     //once we mount check if the wallet is connected 
     return <WalletContext.Provider value={values}>{children}</WalletContext.Provider>
