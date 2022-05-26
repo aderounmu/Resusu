@@ -1,14 +1,14 @@
 import React,{useEffect , useState} from 'react'
-import image1 from '../assets/image1.png'
-import image2 from '../assets/image2.png'
-import image3 from '../assets/image3.png'
+import image1 from '../../assets/image1.png'
+import image2 from '../../assets/image2.png'
+import image3 from '../../assets/image3.png'
 import { Link } from "react-router-dom";
 
 
 const words = [
-    <span className='text-semibold text-green-300'>Savings</span>, 
-    <span className='text-semibold text-blue-300'>Donatings</span>, 
-    <span className='text-semibold text-purple-300'>Contributing</span>,
+    <span className='font-extrabold text-green-300'>Savings</span>, 
+    <span className='font-extrabold text-blue-300'>Donatings</span>, 
+    <span className='font-extrabold text-purple-300'>Contributing</span>,
 ]
 
 
