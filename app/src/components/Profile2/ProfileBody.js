@@ -2,7 +2,10 @@ import React,{ useEffect} from 'react'
 import GroupCard from './GroupCard'
 import { FaPlusCircle} from "react-icons/fa";
 import { useWallet } from '../../context/walletContext'
+import { useNavigate } from 'react-router-dom';
 const ProfileBody = () => {
+
+    const navigate = useNavigate()
     
     return (
     <>
@@ -27,7 +30,7 @@ const ProfileBody = () => {
             <div className='flex flex-row items-center'>
                 <div className='text-bold text-2xl'> Your Groups</div>
                 <div className='ml-5'>
-                    <button className="px-3 py-2 bg-cyan-200 rounded">
+                    <button onClick={()=> navigate('/group/add')} className="px-3 py-2 bg-cyan-200 rounded">
                         <FaPlusCircle className='inline mr-2'/> Add Group
                     </button>
                 </div>

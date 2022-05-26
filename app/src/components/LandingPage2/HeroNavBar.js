@@ -22,19 +22,19 @@ const HeroNavBar = () => {
 
                 <ul className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? 'top-20 ' : 'top-[-490px]'}`}>
                     <Link to='/' className='md:ml-8 text-xl md:my-0 my-7'>
-                        <p className=' hover:text-gray-200 duration-500'>Home</p>
+                        <p className=' hover:text-blue-300 duration-500'>Home</p>
                     </Link>
                     <Link to='/' className='md:ml-8 text-xl md:my-0 my-7'>
-                        <p className=' hover:text-gray-200 duration-500'>About</p>
+                        <p className=' hover:text-blue-300 duration-500'>About</p>
                     </Link>
                     <Link to='/' className='md:ml-8 text-xl md:my-0 my-7'>
-                        <p className=' hover:text-gray-200 duration-500'>How It Works</p>
+                        <p className=' hover:text-blue-300 duration-500'>How It Works</p>
                     </Link>
                     <Link to='/' className='md:ml-8 text-xl md:my-0 my-7'>
-                        <p className=' hover:text-gray-200 duration-500'>Support</p>
+                        <p className=' hover:text-blue-300 duration-500'>Support</p>
                     </Link>
                     {/* <Link to='/' className='md:ml-8 text-xl md:my-0 my-7'>
-                        <p className=' hover:text-gray-200 duration-500'>Homer</p>
+                        <p className=' hover:text-blue-300 duration-500'>Homer</p>
                     </Link> */}
 
                     <Link to='/profile'>

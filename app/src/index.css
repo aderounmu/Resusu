@@ -12,6 +12,7 @@ body ,#root ,html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: rgb(241 245 249 / var(--tw-bg-opacity));
+  /* height: 100%; */
 }
 
 code {
