@@ -63,7 +63,7 @@ const HeroBody = () => {
                     </div>
                     <div className='subheadline my-5 lg:text-xl text-base'> Blockchain backed African Thrift banking</div>
                     <div className="buttons flex flex-row mt-10 lg:mt-14 mx-auto lg:mx-0">
-                        <div className="mr-3 bg-black text-white py-2 px-6 rounded hover:bg-[#82B1FF] duration-500"> <Link to='/'> Get Started</Link></div>
+                        <div className="mr-3 bg-black text-white py-2 px-6 rounded hover:bg-[#82B1FF] duration-500"> <Link to='/profile'> Get Started</Link></div>
                         <div className='ml-3 py-2 px-6 rounded bg-gray-200  duration-500'> <Link to='/'> Learn More</Link></div> 
                     </div>
                 </div>

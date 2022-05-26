@@ -9,6 +9,7 @@ import LandingPage2 from '../pages/LandingPage2'
 import LandingPage from '../pages/LandingPage';
 import AddGroup from '../pages/AddGroup';
 import AddUserPage from '../pages/AddUserPage';
+import UserGroup from '../pages/UserGroup';
 const Main = () => {
   return (
       <div className='bg-slate-100 h-full'>
@@ -21,6 +22,7 @@ const Main = () => {
                   <Route path='/landingpage2' element={<LandingPage2 />} />
                   <Route path='/group/add' element={<AddGroup />} />
                   <Route path='/group/:GroupId/user/:address' element={<AddUserPage/>}/>
+                  <Route path='/group/:id' element={<UserGroup/>}/>
               </Routes>
           </BrowserRouter>
 

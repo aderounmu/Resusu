@@ -15,7 +15,7 @@ const AddGroup = () => {
     // const [isError , setIsError] = useState(false)
 
     // 0 form 1 loading 2 success 3 error
-    const [currenState , setCurrentState] = useState(3)
+    const [currenState , setCurrentState] = useState(2)
 
 
     const handlename = (event) => setName(event.target.value) ;
