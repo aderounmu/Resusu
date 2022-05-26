@@ -2,12 +2,15 @@
 import React from 'react';
 import Main from './navigation/Main';
 import './App.css';
+import {WalletProvider} from './context/walletContext'
 
 function App() {
   return (
-    <div className='h-full'>
-      <Main />
-    </div>
+    <WalletProvider>
+      <div className='h-full'>
+        <Main />
+      </div>
+    </WalletProvider>
   );
 }
 
