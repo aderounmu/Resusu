@@ -1,9 +1,8 @@
 import React, {useState} from 'react'
 import { Link } from "react-router-dom";
-import { CubeIcon, CurrencyDollarIcon, CurrencyEuroIcon } from '@heroicons/react/solid'
+import { CubeIcon } from '@heroicons/react/solid'
 
 const HeroNavBar = () => {
-
 
     let [open,setOpen] = useState(false);
 

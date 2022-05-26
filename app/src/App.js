@@ -11,7 +11,6 @@ function App() {
         <Main />
       </div>
     </WalletProvider>
-    
   );
 }
 

@@ -54,5 +54,3 @@ const ProfileContent = () => {
 }
 
 export default ProfileContent
-
-// #bd922d
