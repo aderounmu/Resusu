@@ -34,6 +34,7 @@ contract Esusu {
         address payable userAddress;
         uint nextPaymentDate;
         uint nextPaymentAmount;
+        uint lastPaymentAmount;
         uint[] completedDonationRounds;
     }
 
@@ -52,6 +53,8 @@ contract Esusu {
         uint donationRound;
         uint donationStartTime;
         uint donationEndTime;
+        uint latePaymentStartTime;
+        uint latePaymentEndTime;
     }
 
 
@@ -131,7 +134,7 @@ contract Esusu {
 
         // create a groupMember object
         uint[] memory groupMemberDonations;
-        GroupMember memory groupMember = GroupMember(payable(msg.sender), 0, 0, groupMemberDonations);
+        GroupMember memory groupMember = GroupMember(payable(msg.sender), 0, 0, 0, groupMemberDonations);
 
         // create the group object
         Group storage group = groupDict[groupCount];
@@ -196,7 +199,7 @@ contract Esusu {
 
         // create a groupMember profile
         uint[] memory groupMemberDonations;
-        GroupMember memory groupMember = GroupMember(payable(msg.sender), 0, 0, groupMemberDonations);
+        GroupMember memory groupMember = GroupMember(payable(msg.sender), 0, 0, 0, groupMemberDonations);
 
         // add groupmember to group
         groupinfo[group.groupName].push(groupMember);
@@ -248,14 +251,16 @@ contract Esusu {
         for (uint j=1; j<groupMembers.length; j++) {
             // create a GroupDonation
             uint donationRoundStartTime = donationRoundsTimer;
-            uint donationRoundEndTime = donationRoundStartTime + 60;
-            GroupDonation memory groupdonation = GroupDonation(group, donationRound, donationRoundStartTime, donationRoundEndTime);
+            uint donationRoundEndTime = donationRoundStartTime + 150;
+            uint lateDonationStartTime = donationRoundEndTime;
+            uint lateDonationEndTime = lateDonationStartTime + 75;
+            GroupDonation memory groupdonation = GroupDonation(group, donationRound, donationRoundStartTime, donationRoundEndTime, lateDonationStartTime, lateDonationEndTime);
 
             // add to the mapping for groups and groupdonations
             groupDonations[groupId].push(groupdonation);
 
             // update the donationRoundsTimer
-            donationRoundsTimer += 120;
+            donationRoundsTimer += 300;
 
             // increase the donations round
             donationRound += 1;
@@ -266,10 +271,10 @@ contract Esusu {
         for (uint i=0; i<groupMembers.length; i++) {
             
             GroupMember storage groupMember = groupMembers[i];
-            groupMember.nextPaymentDate = group.groupActivationTime + 120;
+            groupMember.nextPaymentDate = group.groupActivationTime + 300;
         //     // TODO: ADMIN SHARE
-            groupMember.nextPaymentAmount = ((group.groupBuyInAmount * 6) - group.groupBuyInAmount);
-            // groupMember.groupMemberBalance = groupMember.nextPaymentAmount;
+            groupMember.nextPaymentAmount = ((group.groupBuyInAmount * 6) - group.groupBuyInAmount) / 2;
+            groupMember.lastPaymentAmount = groupMember.nextPaymentAmount;
             group.groupActivationTime = groupMember.nextPaymentDate;
         }
 
@@ -406,6 +411,88 @@ contract Esusu {
         } else {
             revert("no group round of that choice");
         }
+    }
+
+    function lateDonation(uint groupId, uint donationRound) public payable {
+        // check that the round is in late payment
+        // pay
+        // reduce their groupbalance (userbalance) by 1/2 of what they pay
+        // TODO: MAKE HALF PAYMENTS
+
+        // get the group and groupmembers and groupdonations
+        Group storage group = groupDict[groupId];
+        GroupMember[] storage groupMembers = groupinfo_i[groupId];
+        GroupDonation[] storage groupdonations = groupDonations[groupId];
+
+        if (groupMembers.length != 6) {
+            revert("The group is incomplete");
+        }
+
+        uint donationAmount = group.groupBuyInAmount * (1 ether);
+
+        if (msg.value < donationAmount) {
+            revert("group payment should be group buy in amount");
+        }
+
+        // ensure the donator is a member of the group and has not paid for that round
+        bool isGroupMember = false;
+        for (uint i=0; i<groupMembers.length; i++) {
+            if (groupMembers[i].userAddress == msg.sender) {
+                GroupMember storage groupmember = groupMembers[i];
+                for (uint k=0; k<groupmember.completedDonationRounds.length; k++) {
+                    if (groupmember.completedDonationRounds[k] == donationRound) {
+                        revert("You have already donated for this round");
+                    }
+                }
+                isGroupMember = true;
+            }
+        }
+
+        // get the donation round requested for
+        GroupDonation memory selectedDonationRound;
+        bool isFound_selectedDonationRound = false;
+        if (isGroupMember == true) {
+            // get the group donation round that was requested
+            for (uint j=0; j<groupdonations.length; j++) {
+                if (groupdonations[j].donationRound == donationRound) {
+                    selectedDonationRound = groupdonations[j];
+                    isFound_selectedDonationRound = true;
+                }
+            }
+        } else {
+            revert("You are not a member of this group");
+        }
+
+        // check that the round is still valid for late payment
+        if (isFound_selectedDonationRound == true) {
+            if (block.timestamp >= selectedDonationRound.latePaymentStartTime && block.timestamp <= selectedDonationRound.latePaymentEndTime) {
+
+                // pay the donation
+                if(!payable(msg.sender).send(group.groupBuyInAmount)) {
+                    revert("Unable to transfer donation funds");
+                }
+
+                // increase the group balance
+                group.groupBalance += group.groupBuyInAmount;
+
+                // add the donation round to users completed list
+                for (uint m=0; m<groupMembers.length; m++) {
+                    if (groupMembers[m].userAddress == msg.sender) {
+                        GroupMember storage groupmember = groupMembers[m];
+                        groupmember.completedDonationRounds.push(donationRound);
+                        groupmember.lastPaymentAmount -= group.groupBuyInAmount / 2;
+                    }
+                }
+            
+            } else if (block.timestamp < selectedDonationRound.donationStartTime) {
+                revert("This group round is not active yet");
+            } else {
+                revert("This group round is expired");
+            }
+        } else {
+            revert("no group round of that choice");
+        }
+
     }
 }
 
