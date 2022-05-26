@@ -1,16 +1,17 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import {GoKebabVertical} from 'react-icons/go'
 import {FaEdit ,FaTrash , FaExternalLinkAlt } from 'react-icons/fa'
 
 
 
-const GroupCard = () => {
+const GroupCard = ({isUser}) => {
 
     const [toggleSub, setToggleSub] = useState(false)
 
     
     const openSub = () => { setToggleSub(true) }
     const closeSub = () => {setToggleSub(false)}
+
 
     const bgcolor = [
         'bg-blue-100',
@@ -22,7 +23,7 @@ const GroupCard = () => {
     let mybgcolor = bgcolor[Math.floor(Math.random() * bgcolor.length)]
 
   return (
-    <div className="rounded-md p-5 shadow-sm m-4 bg-white mt-8 relative" >
+    <div className="rounded-md p-5 shadow-sm bg-white relative" >
        { !toggleSub ? '': <div className="absolute right-[10px]">
             
             <ul className='px-4 py-2 shadow-sm bg-slate-50' >
@@ -34,10 +35,10 @@ const GroupCard = () => {
         </div> }
 
         <div className="flex justify-between round">
-        <div className='font-bold text-lg' onClick={()=> closeSub()}>
-            Group A
-        </div>
-            <button onClick={()=> openSub()}> <GoKebabVertical/> </button>
+            <div className='font-bold text-lg' onClick={()=> closeSub()}>
+                Group A
+            </div>
+            { isUser ? <></>: <button onClick={()=> openSub()}> <GoKebabVertical/> </button> }
         </div>
 
         

@@ -36,7 +36,7 @@ const ProfileBody = () => {
                 </div>
             </div>
             
-            <div className=' grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1'>
+            <div className=' mt-8 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-x-8 gap-y-6'>
                 <GroupCard/>
                 <GroupCard/>
                 <GroupCard/>
