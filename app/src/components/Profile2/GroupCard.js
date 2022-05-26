@@ -7,9 +7,19 @@ import {FaEdit ,FaTrash , FaExternalLinkAlt } from 'react-icons/fa'
 const GroupCard = () => {
 
     const [toggleSub, setToggleSub] = useState(false)
+
     
     const openSub = () => { setToggleSub(true) }
     const closeSub = () => {setToggleSub(false)}
+
+    const bgcolor = [
+        'bg-blue-100',
+        'bg-green-100',
+        'bg-purple-100',
+        'bg-red-100',
+        'bg-yellow-100',
+    ]
+    let mybgcolor = bgcolor[Math.floor(Math.random() * bgcolor.length)]
 
   return (
     <div className="rounded-md p-5 shadow-sm m-4 bg-white mt-8 relative" >
@@ -27,17 +37,17 @@ const GroupCard = () => {
         <div className='font-bold text-lg' onClick={()=> closeSub()}>
             Group A
         </div>
-            <button onClick={()=> openSub()}> <GoKebabVertical/></button>
+            <button onClick={()=> openSub()}> <GoKebabVertical/> </button>
         </div>
 
         
-        <div className='py-3 px-4 my-3 bg-blue-100 rounded-md flex justify-between' onClick={()=> closeSub()}>
+        <div className={`py-3 px-4 my-3 rounded-md flex justify-between ${mybgcolor}`} onClick={()=> closeSub()}>
             <span>admin :</span>  <span> 87sjhshdhhdhd</span>
         </div>
-        <div className='py-3 px-4 my-3 bg-blue-100 rounded-md flex justify-between' onClick={()=> closeSub()}>
+        <div className={`py-3 px-4 my-3 rounded-md flex justify-between ${mybgcolor}`} onClick={()=> closeSub()}>
             <span>groupBuyInAmount :</span>  <span> 87 ETH</span>
         </div>
-        <div className='py-3 px-4 my-3 bg-blue-100 rounded-md flex justify-between' onClick={()=> closeSub()}>
+        <div className={`py-3 px-4 my-3 rounded-md flex justify-between ${mybgcolor}`} onClick={()=> closeSub()}>
             <span>groupBalance :</span>  <span> 300 ETH</span>
         </div>
 
