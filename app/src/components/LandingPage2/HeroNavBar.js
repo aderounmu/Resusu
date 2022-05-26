@@ -7,12 +7,12 @@ const HeroNavBar = () => {
     let [open,setOpen] = useState(false);
 
     return (
-        <div className='shadow-md w-full fixed top-0 left-0'>
+        <div className='shadow-md w-full fixed top-0 left-0 z-40'>
             <div className='md:flex items-center justify-between bg-gray-100 py-4 md:px-10 px-7'>
-                <div className='font-bold text-2xl cursor-pointer flex items-center'>
-                    <span className='text-3xl mr-1 pt-2'>
+                <div className='font-thin text-2xl cursor-pointer flex items-center '>
+                    {/* <span className='text-3xl mr-1 pt-2'>
                     <CubeIcon className='h-8' />
-                    </span>
+                    </span> */}
                     RESUSU
                 </div>
             
@@ -21,20 +21,23 @@ const HeroNavBar = () => {
                 </div>
 
                 <ul className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? 'top-20 ' : 'top-[-490px]'}`}>
-                    <Link to='/' className='md:ml-8 text-xl md:my-0 my-7 font-semibold'>
-                        <p className=' hover:text-gray-500 duration-500'>Home</p>
+                    <Link to='/' className='md:ml-8 text-xl md:my-0 my-7'>
+                        <p className=' hover:text-gray-200 duration-500'>Home</p>
                     </Link>
-                    <Link to='/' className='md:ml-8 text-xl md:my-0 my-7 font-semibold'>
-                        <p className=' hover:text-gray-500 duration-500'>About</p>
+                    <Link to='/' className='md:ml-8 text-xl md:my-0 my-7'>
+                        <p className=' hover:text-gray-200 duration-500'>About</p>
                     </Link>
-                    <Link to='/' className='md:ml-8 text-xl md:my-0 my-7 font-semibold'>
-                        <p className=' hover:text-gray-500 duration-500'>Features</p>
+                    <Link to='/' className='md:ml-8 text-xl md:my-0 my-7'>
+                        <p className=' hover:text-gray-200 duration-500'>How It Works</p>
                     </Link>
-                    <Link to='/' className='md:ml-8 text-xl md:my-0 my-7 font-semibold'>
-                        <p className=' hover:text-gray-500 duration-500'>Contact</p>
+                    <Link to='/' className='md:ml-8 text-xl md:my-0 my-7'>
+                        <p className=' hover:text-gray-200 duration-500'>Support</p>
                     </Link>
+                    {/* <Link to='/' className='md:ml-8 text-xl md:my-0 my-7'>
+                        <p className=' hover:text-gray-200 duration-500'>Homer</p>
+                    </Link> */}
 
-                    <Link to='/login'>
+                    <Link to='/profile'>
                         <button className='bg-black text-white py-2 px-6 rounded md:ml-8 hover:bg-[#82B1FF] duration-500'>
                             Get Started
                         </button>

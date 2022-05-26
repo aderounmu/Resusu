@@ -3,20 +3,30 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@coinbase/wallet-sdk": "^3.1.0",
     "@heroicons/react": "^1.0.6",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.2.0",
     "@testing-library/user-event": "^13.5.0",
+    "@walletconnect/web3-provider": "^1.7.8",
+    "assert": "^2.0.0",
+    "buffer": "^6.0.3",
+    "ethers": "^5.6.8",
+    "os": "^0.1.2",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-icons": "^4.3.1",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "stream": "^0.0.2",
     "tailwind-scrollbar-hide": "^1.1.7",
-    "web-vitals": "^2.1.4"
+    "url": "^0.11.0",
+    "util": "^0.12.4",
+    "web-vitals": "^2.1.4",
+    "web3modal": "^1.9.7"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "export PORT=3007 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
