@@ -1,0 +1,57 @@
+@keyframes herobottomcolor {
+    from {height: 100%;}
+    to {height: 33.33333333%}
+}
+
+.heroBottom{
+    animation-name: herobottomcolor;
+    animation-duration: 7s;
+    animation-timing-function: ease-out;
+    animation-delay: -1s;
+}
+
+
+/* Copy this @keyframes block to your CSS*/
+@keyframes yourAnimation {
+    0%{
+        opacity: 0;
+        transform: translate(0px,-10px);
+    }
+    100%{
+        opacity: 1;
+        transform: translate(0px,0px);
+    }
+    50%{
+        opacity: 0.5;
+        transform: translate(0px,-5px);
+    }
+}
+
+/* Add the animation: property to whichever element you want to animate */
+.fade-in-hero{
+    animation: yourAnimation 4s ease-in 0s normal none;
+}
+
+
+.heroItem-enter{
+    opacity: 0;
+    transform: translate(0px,-5px);
+}
+
+.heroItem-enter-active{
+    opacity: 1;
+    transform: (0px,0px);
+    transition: opacity 300ms ease-in, transform 300ms ease-in;
+}
+
+.heroItem-exit{
+    opacity: 1;
+    transform: (0px,0px);
+}
+
+.heroItem-exit-active{
+    
+    opacity: 0;
+    transform: translate(0px,-5px);
+    transition: opacity 300ms ease-in, transform 300ms ease-in;
+}

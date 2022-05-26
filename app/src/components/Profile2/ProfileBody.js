@@ -1,9 +1,10 @@
-import React from 'react'
+import React,{ useEffect} from 'react'
 import GroupCard from './GroupCard'
 import { FaPlusCircle} from "react-icons/fa";
-
+import { useWallet } from '../../context/walletContext'
 const ProfileBody = () => {
-  return (
+    
+    return (
     <>
     <div className='flex flex-row justify-between items-center'>
             <div className=''>
@@ -44,6 +45,19 @@ const ProfileBody = () => {
                 <GroupCard/>
                 <GroupCard/>
             </div>
+            
+            {/* <button onClick={ () =>{
+                connectWallet();
+                console.log('People')
+            }}>
+                click me
+            </button>
+            <button onClick={ () =>{
+                disconnect();
+                console.log('Pd')
+            }}>
+                disconnect
+            </button> */}
         </div>
     </>
   )
