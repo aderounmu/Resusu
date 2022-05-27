@@ -104,7 +104,7 @@ contract Esusu {
     }
 
     function getUserGroups() public view returns(Group[] memory) {
-        require(userProfile[msg.sender].userAddress != msg.sender, "Create an EsusuUser account to access this functionality");
+        require(userProfile[msg.sender].userAddress == msg.sender, "Create an EsusuUser account to access this functionality");
 
         Group[] storage usergroups = userGroups[msg.sender];
         return usergroups;
