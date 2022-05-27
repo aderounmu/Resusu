@@ -9,6 +9,7 @@ export async function getSignerContract(provider, networkID) {
         // console.log(networkID);
         // let netid = networkID.toString()
         const address = Esusu.networks[1377].address;
+        //const address = Esusu.networks[80001].address;
         const signer = provider.getSigner();
         const contract = new ethers.Contract(address,abi,signer);
 
