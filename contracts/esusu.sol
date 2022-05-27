@@ -352,6 +352,7 @@ contract Esusu {
         }
     }
 
+
     function userDonation(uint groupId, uint donationRound) public payable {
 
         // get the group and groupmembers and groupdonations
@@ -384,6 +385,7 @@ contract Esusu {
             }
         }
 
+        
         // get the donation round requested for
         GroupDonation memory selectedDonationRound;
         bool isFound_selectedDonationRound = false;

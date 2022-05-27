@@ -87,7 +87,7 @@ const DepositPage = () => {
         try{
     
             console.log('jointried')
-            await userDonation(ethLib, chainId,params.id,round)
+            await userDonation(ethLib, chainId,params.id,round,params.amount)
             
         }catch(err){
             setCurrentState(2)
@@ -102,7 +102,7 @@ const DepositPage = () => {
 
         setCurrentState(0)
         try{  
-            await lateDonation(ethLib, chainId,params.id,round)
+            await lateDonation(ethLib, chainId,params.id,round,params.amount)
         }catch(err){
             setCurrentState(2)
             throw err

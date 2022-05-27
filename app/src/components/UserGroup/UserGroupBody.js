@@ -51,7 +51,9 @@ const UserGroupBody = () => {
     async function activate(){
         try{
             //useParam
-            const _data = await activateGroup(ethLib,chainId,1);
+            let _id = params.id
+            _id = parseInt(_id)
+            const _data = await activateGroup(ethLib,chainId,_id);
         }catch(err){
             throw err
         }
@@ -70,7 +72,7 @@ const UserGroupBody = () => {
     async function deposit(){
         try{
             //useParam and update round
-            const _data = await userDonation(ethLib,chainId , 1 , 1);
+            //const _data = await userDonation(ethLib,chainId , 1 , 1);
         }catch(err){
             throw err
         }
@@ -79,7 +81,9 @@ const UserGroupBody = () => {
     async function paygroupmember(){
         try{
             //useParam
-            const _data = await payGroupMember(ethLib,chainId,1);
+            let _id = params.id
+            _id = parseInt(_id)
+            const _data = await payGroupMember(ethLib,chainId,_id);
         }catch(err){
             throw err
         }
@@ -129,7 +133,7 @@ const UserGroupBody = () => {
                     </button>
                 </div></>}
                 <div className='my-3 flex-1'>
-                    <button onClick={()=> navigate(`/group/deposit/${params.id}`)} className="px-3 py-2 bg-pink-200 rounded w-full">
+                    <button onClick={()=> navigate(`/group/deposit/${params.id}/amount/${groupData.groupBuyInAmount}`)} className="px-3 py-2 bg-pink-200 rounded w-full">
                             Deposit
                     </button>
                 </div>
