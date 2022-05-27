@@ -5,7 +5,7 @@ import { useWallet } from '../../context/walletContext'
 import { useNavigate } from 'react-router-dom';
 import { ethers } from "ethers";
 // import { createUserProfile } from '../../services'
-const ProfileBody = ({account, data , user}) => {
+const ProfileBody = ({account, data , user, groups}) => {
 
     const navigate = useNavigate()
     
@@ -44,6 +44,7 @@ const ProfileBody = ({account, data , user}) => {
             </div>
             
             <div className=' mt-8 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-x-8 gap-y-6'>
+                {/* <GroupCard/>
                 <GroupCard/>
                 <GroupCard/>
                 <GroupCard/>
@@ -52,8 +53,19 @@ const ProfileBody = ({account, data , user}) => {
                 <GroupCard/>
                 <GroupCard/>
                 <GroupCard/>
-                <GroupCard/>
-                <GroupCard/>
+                <GroupCard/> */}
+                {
+                    groups.map((item,index)=><GroupCard
+                    key={index}
+                    id={item.id}
+                    groupName ={item.groupName}
+                    groupBuyInAmount={item.groupBuyInAmount}
+                    groupCoordinator ={item.groupCoordinator}
+                    groupBalance={item.groupBalance}
+                    groupActivationTime={item.groupActivationTime}
+                    
+                    />)
+                }
             </div>
             
             {/* <button onClick={ () =>{

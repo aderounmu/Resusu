@@ -40,6 +40,7 @@ contract Esusu {
 
     // create a group
     struct Group {
+        uint id;
         string groupName;
         uint groupBuyInAmount;
         address payable groupCoordinator;
@@ -146,7 +147,9 @@ contract Esusu {
         // create the group object
         Group storage group = groupDict[groupCount];
         groupMemberDict[groupCount].push(groupMember);
-
+        
+        
+        group.id = groupCount;
         group.groupName = groupName;
         group.groupBuyInAmount = groupBuyInAmount;
         group.groupCoordinator = payable(msg.sender);

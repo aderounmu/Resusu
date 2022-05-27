@@ -4,7 +4,7 @@ import {FaEdit ,FaTrash , FaExternalLinkAlt } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
 
 
-const GroupCard = ({isUser, groupName ,
+const GroupCard = ({isUser, id, groupName ,
 groupBuyInAmount,
 groupCoordinator ,
 groupBalance,
@@ -33,7 +33,7 @@ groupActivationTime}) => {
             
             <ul className='px-4 py-2 shadow-sm bg-slate-50' >
                 <li>
-                    <Link to={'/group/1'} className='my-2 w-full flex items-center justify-around'>
+                    <Link to={`/group/${id}`} className='my-2 w-full flex items-center justify-around'>
                         <span> Open</span> <FaExternalLinkAlt className='inline ml-2'/>
                     </Link>
                 </li>
@@ -59,14 +59,14 @@ groupActivationTime}) => {
         </div> }
 
         
-        <div className={`py-3 px-4 my-3 rounded-md flex justify-between ${mybgcolor}`} onClick={()=> closeSub()}>
-            <span>admin :</span>  <span> {groupCoordinator}</span>
+        <div className={`py-3 px-4 my-3 rounded-md flex flex-col justify-between ${mybgcolor}`} onClick={()=> closeSub()}>
+            <span className='font-semibold'>admin :</span>  <span className="break-words"> {groupCoordinator}</span>
         </div>
-        <div className={`py-3 px-4 my-3 rounded-md flex justify-between ${mybgcolor}`} onClick={()=> closeSub()}>
-            <span>groupBuyInAmount :</span>  <span> {groupBuyInAmount}</span>
+        <div className={`py-3 px-4 my-3 rounded-md flex flex-col  justify-between ${mybgcolor}`} onClick={()=> closeSub()}>
+            <span className='font-semibold'>groupBuyInAmount :</span>  <span className="break-words"> {groupBuyInAmount}</span>
         </div>
-        <div className={`py-3 px-4 my-3 rounded-md flex justify-between ${mybgcolor}`} onClick={()=> closeSub()}>
-            <span>groupBalance :</span>  <span> {groupBalance}</span>
+        <div className={`py-3 px-4 my-3 rounded-md flex flex-col justify-between ${mybgcolor}`} onClick={()=> closeSub()}>
+            <span className='font-semibold'>groupBalance :</span>  <span className="break-words"> {groupBalance}</span>
         </div>
 
     </div>
