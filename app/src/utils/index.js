@@ -11,3 +11,16 @@ export function modifiyGroup(data){
     }
 
 }
+
+
+export function modifiyUser(data){
+
+    return {
+        userAddress: data[0],
+        nextPaymentDate: ethers.utils.formatEther(data[1]),
+        nextPaymentAmount :ethers.utils.formatEther(data[2]),
+        lastPaymentAmount :ethers.utils.formatEther(data[3]),
+        completedDonationRounds : data[4],
+    }
+
+}

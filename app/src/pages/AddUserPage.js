@@ -66,15 +66,8 @@ const AddUserPage = () => {
     setCurrentState(0)
     try{
 
-        // console.log(ethLib)
-        // console.log(chainId)
-      
+        console.log('jointried')
         await joinGroup(ethLib, chainId,groupId)
-
-        //connect wallet
-
-        //check if user exist 
-        
         
     }catch(err){
         setCurrentState(2)
