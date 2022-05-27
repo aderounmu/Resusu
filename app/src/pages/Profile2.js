@@ -58,7 +58,7 @@ function Profile2() {
     try{
       console.log('here-333')
       _user = await getUserProfile(_pro , _cha)
-      let _amount = ethers.utils.formatEther(_user[1])
+      let _amount = _user[1].toNumber() 
       setUser({
         address: _user[0],
         amount : _amount
