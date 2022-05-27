@@ -129,7 +129,7 @@ const UserGroupBody = () => {
                     </button>
                 </div></>}
                 <div className='my-3 flex-1'>
-                    <button onClick={()=> deposit()} className="px-3 py-2 bg-pink-200 rounded w-full">
+                    <button onClick={()=> navigate(`/group/deposit/${params.id}`)} className="px-3 py-2 bg-pink-200 rounded w-full">
                             Deposit
                     </button>
                 </div>
@@ -138,7 +138,6 @@ const UserGroupBody = () => {
                             Withdraw
                     </button>
                 </div>
-                
             </div>
         </div>
 
