@@ -21,7 +21,8 @@ const Main = () => {
                   <Route path='/profile' element={<Profile2/>}/>
                   <Route path='/landingpage2' element={<LandingPage2 />} />
                   <Route path='/group/add' element={<AddGroup />} />
-                  <Route path='/group/:GroupId/user/:address' element={<AddUserPage/>}/>
+                  {/* <Route path='/group/:GroupId/user/' element={<AddUserPage/>}/> */}
+                  <Route path='/group/join' element={<AddUserPage/>}/>
                   <Route path='/group/:id' element={<UserGroup/>}/>
               </Routes>
           </BrowserRouter>

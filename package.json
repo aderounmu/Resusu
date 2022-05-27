@@ -7,7 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "ganache": "ganache-cli --mnemonic=\"glance protect wet breeze conduct lady steel soda tissue ball rabbit arrow\" "
   },
   "repository": {
     "type": "git",
