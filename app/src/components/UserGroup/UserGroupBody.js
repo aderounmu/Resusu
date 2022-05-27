@@ -3,8 +3,8 @@ import GroupCard from '../Profile2/GroupCard'
 import { useNavigate } from 'react-router-dom'
 import UserMember from './UserMember';
 import { useWallet, WalletConnectModal } from '../../context/walletContext'
-import { getGroupbyId } from '../../services/index.js'
-import { modifiyGroup } from '../../utils';
+import { getGroupbyId, activateGroup, userWithdrawal, userDonation , payGroupMember } from '../../services/index.js'
+import { modifiyGroup , modifiyUser } from '../../utils';
 
 
 
@@ -19,6 +19,8 @@ const UserGroupBody = () => {
         groupBalance: '',
         groupActivationTime: '',
     })
+
+    const [userData,setUserData] = useState([])
     const [loading , setloading] = useState(true);
 
     const { connectWallet, account , isActive , provider , chainId  ,ethLib } = useWallet()
@@ -27,21 +29,57 @@ const UserGroupBody = () => {
         setloading(true)    
 
         try{
-
+            //use Param
             const _data = await getGroupbyId(ethLib,chainId,1);
             setData(_data)
-
             const _x = modifiyGroup(_data[0])
+            const _y = _data[1].map(item => modifiyUser(item))
+            setUserData(_y)
+            // console.log(_y)
             setGroupData(_x)
-            
-
-            
-
         }catch(err){
             throw err
         }
 
         setloading(false)
+    }
+
+
+    async function activate(){
+        try{
+            //useParam
+            const _data = await activateGroup(ethLib,chainId,1);
+        }catch(err){
+            throw err
+        }
+    }
+
+    async function widthdraw(){
+        try{
+            //useParam
+            const _data = await userWithdrawal(ethLib,chainId);
+        }catch(err){
+            throw err
+        }
+    }
+
+
+    async function deposit(){
+        try{
+            //useParam and update round
+            const _data = await userDonation(ethLib,chainId , 1 , 1);
+        }catch(err){
+            throw err
+        }
+    }
+
+    async function paygroupmember(){
+        try{
+            //useParam
+            const _data = await payGroupMember(ethLib,chainId,1);
+        }catch(err){
+            throw err
+        }
     }
 
     useEffect(()=>{
@@ -75,27 +113,29 @@ const UserGroupBody = () => {
                     groupActivationTime={groupData.groupActivationTime}
                 isUser={true}/>
             </div>
-            <div className='grid  grid-cols-3 mt-8 gap-4 justify-between lg:mt-0 lg:w-2/5 w-full '>
-                <div className='my-3'>
-                    <button onClick={()=> navigate('/group/add')} className="px-3 py-2 bg-cyan-200 rounded w-full">
+            <div className='flex flex-row mt-8 gap-4 justify-between lg:mt-0 lg:w-2/5 w-full '>
+                
+                { account !== groupData.groupCoordinator ? <></>: <><div className='my-3 flex-1'>
+                    <button onClick={()=> activate()} className="px-3 py-2 bg-cyan-200 rounded w-full">
                            Activate
                     </button>
                 </div>
-                <div className='my-3'>
-                    <button onClick={()=> navigate('/group/add')} className="px-3 py-2 bg-pink-200 rounded w-full">
+                <div className='my-3 flex-1'>
+                    <button onClick={()=> paygroupmember()} className="px-3 py-2  bg-gray-400 rounded">
+                            payGroupMember
+                    </button>
+                </div></>}
+                <div className='my-3 flex-1'>
+                    <button onClick={()=> deposit()} className="px-3 py-2 bg-pink-200 rounded w-full">
                             Deposit
                     </button>
                 </div>
-                <div className='my-3'>
-                    <button onClick={()=> navigate('/group/add')} className="px-3 py-2  bg-green-200 rounded w-full ">
+                <div className='my-3 flex-1'>
+                    <button onClick={()=> widthdraw()} className="px-3 py-2  bg-green-200 rounded w-full ">
                             Withdraw
                     </button>
                 </div>
-                {/* <div className='my-3'>
-                    <button onClick={()=> navigate('/group/1/user/')} className="px-3 py-2  bg-gray-400 rounded">
-                            Group Link
-                    </button>
-                </div> */}
+                
             </div>
         </div>
 
@@ -105,8 +145,15 @@ const UserGroupBody = () => {
         <div class="my-6 text-3xl font-semibold">Group Members</div>
         
         <ul>
-            {[1,2,3,4,5].map((index) => <li className='my-5'>
-                <UserMember/>
+            {userData.map((item, index) => <li className='my-5'>
+                <UserMember
+                key={index}
+                userAddress ={item.userAddress}
+                nextPaymentDate={item.nextPaymentDate}
+                nextPaymentAmount={item.nextPaymentAmount}
+                lastPaymentAmount={item.lastPaymentAmount}
+                completedDonationRounds={item.completedDonationRounds}
+                />
             </li>)}
         </ul>
 

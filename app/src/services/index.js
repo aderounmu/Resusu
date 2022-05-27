@@ -106,7 +106,9 @@ export async function joinGroup(provider, networkID, id){
 
     try{
 
-        let tx = await contract.joinGroup(id);
+        let tx = await contract.joinGroup(id,{
+            value: ethers.utils.parseEther('5')
+        });
         await tx.wait();
 
     }catch(err){
