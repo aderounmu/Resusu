@@ -103,6 +103,13 @@ contract Esusu {
         return userprofile;
     }
 
+    function getUserGroups() public view returns(Group[] memory) {
+        require(userProfile[msg.sender].userAddress != msg.sender, "Create an EsusuUser account to access this functionality");
+
+        Group[] storage usergroups = userGroups[msg.sender];
+        return usergroups;
+    }
+
     function createUserProfile() public {
 
         require(userProfile[msg.sender].userAddress != msg.sender, "You are already a user");
@@ -148,6 +155,9 @@ contract Esusu {
 
         // add to the list of groups
         groupList.push(group);
+
+        // add the group to the user's groups
+        userGroups[msg.sender].push(group);
 
         // add groupmember to group
         groupinfo[group.groupName].push(groupMember);
@@ -200,6 +210,9 @@ contract Esusu {
         // create a groupMember profile
         uint[] memory groupMemberDonations;
         GroupMember memory groupMember = GroupMember(payable(msg.sender), 0, 0, 0, groupMemberDonations);
+
+        // add the group to the user's groups
+        userGroups[msg.sender].push(group);
 
         // add groupmember to group
         groupinfo[group.groupName].push(groupMember);
