@@ -75,7 +75,7 @@ async function connectToMetamask () {
 }
 
 
-export const WalletContext = React.createContext(null);
+export const WalletContext = React.createContext();
 
 export const WalletProvider = ({children}) => {
 
@@ -102,9 +102,20 @@ export const WalletProvider = ({children}) => {
             setProvider(_provider);
             setEthLib(_ethLib);
            if(_account) setAccount(_account[0]);
-            setChainId(_network.chainId)
+            setChainId(parseInt(_network.chainId))
+            setIsActive(true)
 
+            console.log(_account[0]);
             console.log(account)
+            console.log(_provider)
+
+            return {
+              _account,
+              _provider,
+              _ethLib,
+              _netID : parseInt(_network.chainId)
+            }
+
         }catch(err){
           setError(err)
           throw err
@@ -117,6 +128,7 @@ export const WalletProvider = ({children}) => {
         setAccount();
         setChainId();
         setNetwork("");
+        setIsActive(false);
     };
 
     const disconnect = async () => {
@@ -135,11 +147,12 @@ export const WalletProvider = ({children}) => {
         if (provider?.on) {
           const handleAccountsChanged = (accounts) => {
             console.log("accountsChanged", accounts);
+            
             if (accounts) setAccount(accounts[0]);
           };
     
           const handleChainChanged = (_hexChainId) => {
-            setChainId(_hexChainId);
+            setChainId(parseInt(Number(_hexChainId)));
           };
     
           const handleDisconnect = () => {
