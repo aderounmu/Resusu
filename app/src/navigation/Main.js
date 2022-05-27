@@ -10,6 +10,7 @@ import LandingPage from '../pages/LandingPage';
 import AddGroup from '../pages/AddGroup';
 import AddUserPage from '../pages/AddUserPage';
 import UserGroup from '../pages/UserGroup';
+import DepositPage from '../pages/DepositPage';
 const Main = () => {
   return (
       <div className='bg-slate-100 h-full'>
@@ -24,6 +25,7 @@ const Main = () => {
                   {/* <Route path='/group/:GroupId/user/' element={<AddUserPage/>}/> */}
                   <Route path='/group/join' element={<AddUserPage/>}/>
                   <Route path='/group/:id' element={<UserGroup/>}/>
+                  <Route path='/group/deposit/:id' element={<DepositPage/>}/>
               </Routes>
           </BrowserRouter>
 

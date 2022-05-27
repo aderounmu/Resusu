@@ -196,3 +196,18 @@ export async function userDonation(provider, networkID,id,round){
     }
     return 'Pay out successful';
 }
+
+
+export async function lateDonation(provider, networkID,id,round){
+    const contract = await getSignerContract(provider,networkID);
+
+    try{
+
+        let tx = await contract.lateDonation(id,round);
+        await tx.wait();
+
+    }catch(err){
+        throw err
+    }
+    return 'Pay out successful';
+}
