@@ -25,7 +25,7 @@ const Main = () => {
                   {/* <Route path='/group/:GroupId/user/' element={<AddUserPage/>}/> */}
                   <Route path='/group/join' element={<AddUserPage/>}/>
                   <Route path='/group/:id' element={<UserGroup/>}/>
-                  <Route path='/group/deposit/:id' element={<DepositPage/>}/>
+                  <Route path='/group/deposit/:id/amount/:amount' element={<DepositPage/>}/>
               </Routes>
           </BrowserRouter>
 

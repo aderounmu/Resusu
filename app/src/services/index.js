@@ -183,12 +183,14 @@ export async function userWithdrawal(provider, networkID){
 }
 
 
-export async function userDonation(provider, networkID,id,round){
+export async function userDonation(provider, networkID,id,round,groupBuyInAmount){
     const contract = await getSignerContract(provider,networkID);
 
     try{
 
-        let tx = await contract.userDonation(id,round);
+        let tx = await contract.userDonation(id,round,{
+            value: ethers.utils.parseEther(groupBuyInAmount)
+        });
         await tx.wait();
 
     }catch(err){
@@ -198,12 +200,14 @@ export async function userDonation(provider, networkID,id,round){
 }
 
 
-export async function lateDonation(provider, networkID,id,round){
-    const contract = await getSignerContract(provider,networkID);
+export async function lateDonation(provider, networkID,id,round,groupBuyInAmount){
+    const contract = await getSignerContract(provider,networkID, groupBuyInAmount);
 
     try{
 
-        let tx = await contract.lateDonation(id,round);
+        let tx = await contract.lateDonation(id,round,{
+            value: ethers.utils.parseEther(groupBuyInAmount)
+        });
         await tx.wait();
 
     }catch(err){
