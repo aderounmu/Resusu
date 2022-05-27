@@ -1,6 +1,6 @@
 import React, {useState , useEffect} from 'react'
 import GroupCard from '../Profile2/GroupCard'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate , useParams } from 'react-router-dom'
 import UserMember from './UserMember';
 import { useWallet, WalletConnectModal } from '../../context/walletContext'
 import { getGroupbyId, activateGroup, userWithdrawal, userDonation , payGroupMember } from '../../services/index.js'
@@ -19,6 +19,7 @@ const UserGroupBody = () => {
         groupBalance: '',
         groupActivationTime: '',
     })
+    const params = useParams()
 
     const [userData,setUserData] = useState([])
     const [loading , setloading] = useState(true);
@@ -30,7 +31,9 @@ const UserGroupBody = () => {
 
         try{
             //use Param
-            const _data = await getGroupbyId(ethLib,chainId,1);
+            let _id = params.id
+            _id = parseInt(_id)
+            const _data = await getGroupbyId(ethLib,chainId,_id);
             setData(_data)
             const _x = modifiyGroup(_data[0])
             const _y = _data[1].map(item => modifiyUser(item))

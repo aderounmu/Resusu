@@ -9,10 +9,11 @@ import Message from '../components/General/Message'
 import { ethers } from "ethers";
 
 import { useWallet, WalletConnectModal } from '../context/walletContext'
-import { createUserProfile , getUserProfile} from '../services/index.js'
+import { createUserProfile , getUserGroups, getUserProfile} from '../services/index.js'
+import { modifiyGroup, modifiyUser } from '../utils/index.js'
 
 
-function statebody (mystate, connectWallet, getData,account,user , error){
+function statebody (mystate, connectWallet, getData,account,user , error , groups){
   switch (mystate) {
     case 0:
         return <WalletConnectModal connectWallet={ 
@@ -25,11 +26,11 @@ function statebody (mystate, connectWallet, getData,account,user , error){
     case 1:
         return  <Loading show={true} Message={'We are getting things started'}/>;
     case 2:
-        return <ProfileBody account={account} user={user}/> ;
+        return <ProfileBody account={account} user={user} groups={groups}/> ;
     case 3:
         return <Message Message={error} imagesrc={disappointed} color='red' other={<>Sorry Something went wrong please try again</> } onClick={()=> getData()}/>;
     case 4:
-      return <Message Message={'Your Group was successfully added'} imagesrc={star_struck} color='green' other={<>Group Was Success Created</>} onClick={()=> getData()}/>;
+      return <Message Message={'Your Account was successfully added'} imagesrc={star_struck} color='green' other={<>Account Creation was successful</>} onClick={()=> getData()}/>;
     default:
         return <WalletConnectModal connectWallet={ () => connectWallet()}/> ;
   }
@@ -63,6 +64,13 @@ function Profile2() {
         amount : _amount
       })
       // setUser(_user)
+
+      //get groups
+
+      let _groups = await getUserGroups(_pro, _cha)
+      _groups = _groups.map(item=>modifiyGroup(item))
+      setGroups(_groups)
+      console.log(_groups)
     }catch(err){
       // if(err.hasOwnProperty('data')){
       //   if(err.data.message === 'VM Exception while processing transaction: Create an EsusuUser account to view profile' ){
@@ -119,7 +127,7 @@ function Profile2() {
     <div>
         <Sidebar/>
         <Body>
-            { statebody(currenState ,connectWallet, getData,account,user , error ) }
+            { statebody(currenState ,connectWallet, getData,account,user , error,groups ) }
            
         </Body>
     </div>

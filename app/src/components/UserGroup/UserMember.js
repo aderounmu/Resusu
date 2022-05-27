@@ -14,10 +14,10 @@ const UserMember = ({
            {userAddress}
         </div>
         <div className="text-base lg:text-xl">
-            12/10/2031
+            {nextPaymentDate}
         </div>
         <div className="text-base lg:text-xl">
-            ETH 1000
+            ETH {nextPaymentAmount}
         </div>
         <div className='hidden lg:flex flex-row gap-6'>
             <AiFillCheckCircle className="text-green-600 text-2xl"/>

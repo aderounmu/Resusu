@@ -69,6 +69,18 @@ export async function getUserProfile(provider,networkID){
 
 }
 
+export async function getUserGroups(provider,networkID){
+
+    //gettting contract 
+
+    const contract = await getSignerContract(provider, networkID);
+    
+    let usergroups= await contract.getUserGroups();
+
+    return usergroups;
+
+}
+
 
 export async function createGroup(provider, networkID, groupName, groupBuyInAmount){
 
