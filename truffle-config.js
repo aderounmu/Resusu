@@ -1,6 +1,9 @@
 const path = require("path");
-// const HDWalletProvider = require('@truffle/hdwallet-provider');
-// require('dotenv').config();
+const HDWalletProvider = require('@truffle/hdwallet-provider');
+require('dotenv').config();
+
+const fs = require('fs');
+const mnemonic = fs.readFileSync(".secret").toString().trim();
 
 module.exports = {
   // See <http://truffleframework.com/docs/advanced/configuration>
@@ -25,13 +28,16 @@ module.exports = {
       network_id: "*"
     },
     matic: {
-      provider: () => new HDWalletProvider(process.env.MNEMONIC, `https://rpc-mumbai.matic.today`),
+      // provider: () => new HDWalletProvider(process.env.MNEMONIC, `https://rpc-mumbai.maticvigil.com/v1/ID`),
+      // provider: () => new HDWalletProvider(process.env.MNEMONIC, `https://rpc-mumbai.matic.today`),
+      //provider: () => new HDWalletProvider(process.env.MNEMONIC, `https://rpc-mumbai.maticvigil.com`),
+      provider: () => new HDWalletProvider(process.env.MNEMONIC, `https://polygon-mumbai.infura.io/v3/3b6d4c576e9a42acb45fa1ec8991e89f`),
       network_id: 80001,
       confirmations: 2,
       skipDryRun: true,
       gas: 6000000,
       gasPrice: 10000000000,
-
+      
     },
   },
   compilers: {

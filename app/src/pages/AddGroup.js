@@ -12,7 +12,8 @@ import { useWallet, WalletConnectModal } from '../context/walletContext'
 const Myform = ({handlename , handleSubmit, handlebuyin , name , buyin}) => {
     return (<form className='h-screen flex flex-col justify-center items-center' onSubmit={handleSubmit}>
     <div className='flex flex-col items-center'>
-        <div className='my-12 font-extrabold text-4xl text-center w-2/3'> Create A Group : Add your group name 📝  and Buy In Amount 💵</div>
+        <div className='my-3 font-extrabold text-4xl text-center w-2/3'> Create A Group : Add your group name 📝  and Buy In Amount 💵</div>
+        <div className='my-12'>minimum of 5 units is required as buy in amount</div>
         <div className='lg:flex lg:flex-row'>
             <div className='w-full m-3'><input value={name} onChange={handlename}  className='w-full p-3 border-blue-400 border-2 rounded-md' type='text' placeholder='Group Name'/></div>
             <div className='w-full m-3'><input value={buyin} onChange={handlebuyin} className='w-full p-3 border-blue-400 border-2 rounded-md' type='text' placeholder='By In Amount'/></div>
