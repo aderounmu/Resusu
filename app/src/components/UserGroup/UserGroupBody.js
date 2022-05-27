@@ -54,6 +54,7 @@ const UserGroupBody = () => {
             let _id = params.id
             _id = parseInt(_id)
             const _data = await activateGroup(ethLib,chainId,_id);
+            await getData()
         }catch(err){
             throw err
         }
