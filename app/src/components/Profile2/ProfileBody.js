@@ -1,9 +1,11 @@
-import React,{ useEffect} from 'react'
+import React,{ useEffect , useState} from 'react'
 import GroupCard from './GroupCard'
 import { FaPlusCircle} from "react-icons/fa";
 import { useWallet } from '../../context/walletContext'
 import { useNavigate } from 'react-router-dom';
-const ProfileBody = () => {
+import { ethers } from "ethers";
+// import { createUserProfile } from '../../services'
+const ProfileBody = ({account, data , user}) => {
 
     const navigate = useNavigate()
     
@@ -12,13 +14,13 @@ const ProfileBody = () => {
     <div className='flex flex-row justify-between items-center'>
             <div className=''>
                 <div className=' text-2xl lg:text-4xl font-semibold'>Good Morning</div>
-                <div className='text-base mt-2 text-gray-400'>Here what's happening in today</div>
+                <div className='text-base mt-2 text-gray-400'>{account}</div>
             </div>
             <div>
             <div className='text-xl font-medium'>
                 Total Holding
             </div>
-                <div className='text-base text-gray-400'>200 ETH</div>
+                <div className='text-base text-gray-400'>{ user.amount} ETH</div>
              </div>  
            
         </div>
@@ -32,6 +34,11 @@ const ProfileBody = () => {
                 <div className='ml-5'>
                     <button onClick={()=> navigate('/group/add')} className="px-3 py-2 bg-cyan-200 rounded">
                         <FaPlusCircle className='inline mr-2'/> Add Group
+                    </button>
+                </div>
+                <div className='ml-5'>
+                    <button onClick={()=> navigate('/group/join/')} className="px-3 py-2 bg-red-200 rounded">
+                        <FaPlusCircle className='inline mr-2'/> Join Group
                     </button>
                 </div>
             </div>
